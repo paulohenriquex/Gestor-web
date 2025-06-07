@@ -1,13 +1,11 @@
 package br.com.gestorweb.entity;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,16 +14,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Produto {
+public class IngredienteReceita {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  private Double percapita;
 
-  private String nome;
-  private BigDecimal preco;
-  private String medida;
-  private String categoria;
-  private String marca;
-  @OneToMany(mappedBy = "produto")
-  private List<IngredienteReceita> ingredientes;
+  @ManyToOne
+  @JoinColumn(name = "produto_id")
+  private Produto produto;
+
+  @ManyToOne
+  @JoinColumn(name = "receita_id")
+  private Receita receita;
 }
