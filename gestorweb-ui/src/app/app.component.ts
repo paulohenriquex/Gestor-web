@@ -29,7 +29,7 @@ export class AppComponent implements OnInit{
 
 
  carregarProdutos(): void {
-  this.produtoService.listarProdutos().subscribe((dados: Produto[]) => { // <--- PROBLEMA AQUI
+  this.produtoService.listarProdutos().subscribe((dados: Produto[]) => {
     this.produtos = dados;
   });
 }
